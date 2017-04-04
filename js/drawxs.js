@@ -99,7 +99,7 @@
             plotOptions: {
                 series: {
                   
-                    cursor: 'pointer',
+                    //cursor: 'pointer',
                     point: {
                         events: {
                             click: function () {

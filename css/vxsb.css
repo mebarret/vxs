@@ -84,6 +84,19 @@
           -webkit-margin-end: 0px;
           font-weight: bold;
       }    
+      #HomeButton {
+        position: absolute;
+        top: 90px;
+        left: 20px;
+        z-index: 50;
+      }
+      #search {
+        display:block;
+        position: absolute;
+        top: 18px;
+        left: 60px;
+        z-index: 1;
+      }
       #polyline {
         background-image: url("../images/ic_timeline_white_24dp_1x.png");
       }
@@ -92,6 +105,15 @@
       }
       #zoomXS {
         background-image: url("../images/ic_zoom_out_map_white_24dp_1x.png");
+      }
+      .btn-group{
+        position: absolute;
+        top: 55px;
+        left: 60px;
+        z-index: 50;
+      }
+      .btn-group > div {
+        float: left;
       }
       .PopupButton {
         display:block;
@@ -117,19 +139,6 @@
       .esriLegendServiceLabel {
           display: none;
       }
-      #HomeButton {
-          position: absolute;
-          top: 90px;
-          left: 20px;
-          z-index: 50;
-      }
-      #search {
-        display:block;
-        position: absolute;
-        top: 18px;
-        left: 60px;
-        z-index: 1;
-      }
       .esriSimpleSliderTL {
           top: 10px;
           left: 10px;
@@ -148,4 +157,11 @@
 }
 .esriLabel {
     font-size: small;
+}
+
+.esriLayerList .esriContainer {
+    background-color: #f8f8f8;
+    color: #6e6e6e;
+    border-top: none;
+    border-bottom: none;
 }

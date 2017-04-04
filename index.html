@@ -50,22 +50,20 @@
       
       <!-- Legend -->
       <div class="borders" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'leading', splitter:true" style="width: 275px">
-          Draw a line anywhere in McHenry County to generate a cross section on-the-fly from the 3D model.
-            <br /> 
-            <div id="polyline" class="PopupButton" role="button" title="Draw Cross Section" ><span>Draw Cross Section</span></div>
-            <div id="point" class="PopupButton" role="button" title="Draw Borehole" ><span>Draw Borehole</span></div>
-            <div id="zoomXS" class="PopupButton" role="button" title="Zoom to Cross Section Extent" style="display:none;"><span>Zoom to Cross Section Extent</span></div>
-            <br />
-            <br />
-            <br />
             Layers
             <div id="layersDiv"></div>
       </div>
       
       <!-- Map -->
       <div id="map" class="borders" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+        
           <div id="search"></div>
-          <div id="HomeButton"></div>   
+            <div id="HomeButton"></div>   
+          <div class="btn-group">            
+            <div id="polyline" class="PopupButton" role="button" title="Draw Cross Section" ><span>Draw Cross Section</span></div>
+            <div id="point" class="PopupButton" role="button" title="Draw Borehole" ><span>Draw Borehole</span></div>
+            <div id="zoomXS" class="PopupButton" role="button" title="Zoom to Cross Section Extent" style="display:none;"><span>Zoom to Cross Section Extent</span></div>
+          </div>
           
       </div>
       
