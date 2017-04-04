@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
+      on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>3D Geologic Mapping</title>
+    <link rel="stylesheet" href="//js.arcgis.com/3.20/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="//js.arcgis.com/3.20/esri/css/esri.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/vxsb.css">   
+
+    <script src="//fgnass.github.io/spin.js/spin.min.js"></script>
+    <script src="//js.arcgis.com/3.20/"></script>    
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <script src="./js/vxsb.js"></script>
+    <script src="./js/drawxs.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-24229961-2', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
+    
+</head>
+ 
+ 
+  <body class="claro">
+    
+    <div id="mainWindow" class="app" data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%">
+        
+      <div id="title-pane" class="borders" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'" >
+          <h1>
+              <span id="title">McHenry County Geology</span>
+              <a data-dojo-attach-point="version" href="ChangeLog.html" target="_blank"></a>
+              <a href="http://www.isgs.illinois.edu/" target="_blank">
+                <img src="./images/ISGS_horiz_logo.png" title="Illinois State Geological Survey Logo" style="width: 200px; float: right"/></a>                
+          </h1>
+      </div>      
+    
+      
+      <!-- Legend -->
+      <div class="borders" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'leading', splitter:true" style="width: 275px">
+          Draw a line anywhere in McHenry County to generate a cross section on-the-fly from the 3D model.
+            <br /> 
+            <div id="polyline" class="PopupButton" role="button" title="Draw Cross Section" ><span>Draw Cross Section</span></div>
+            <div id="point" class="PopupButton" role="button" title="Draw Borehole" ><span>Draw Borehole</span></div>
+            <div id="zoomXS" class="PopupButton" role="button" title="Zoom to Cross Section Extent" style="display:none;"><span>Zoom to Cross Section Extent</span></div>
+            <br />
+            <br />
+            <br />
+            Layers
+            <div id="layersDiv"></div>
+      </div>
+      
+      <!-- Map -->
+      <div id="map" class="borders" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+          <div id="search"></div>
+          <div id="HomeButton"></div>   
+          
+      </div>
+      
+      <!-- Cross Section -->
+      <div id="bottomPane" class="borders" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:0px">
+          <button id="closeXS" type="button" class="close" aria-hidden="true" style="display:none;">×</button>
+            <!-- Cross Section Pane -->
+            <div id="XSPane" style="overflow-x:auto;display:none;">
+                <div id="chartContainer" >
+                  <div id="container" style="min-width: 310px; height: 322px; margin: 0 auto"></div>
+                  
+                </div>
+                <div id="spinnerDiv"></div>
+            </div>
+            
+      </div>        
+          
+    </div>
+    
+              
+  </body>
+
+ 
+</html>
