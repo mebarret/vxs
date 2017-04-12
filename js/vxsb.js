@@ -273,7 +273,7 @@
                              key === "SHAPE_Length" || key === "SHAPE_Area" || key === "Shape_Area" || key === "Shape_Length"){
                       myAttributes += "";
                     }
-                    else if (key === "USGS Realtime Observation Network" || key === "Graphic Log" || key === "ILSTRAT"){
+                    else if (key === "USGS_LINK" || key === "Graphic Log" || key === "ILSTRAT"){
                       myAttributes += "";
                     }
                     else if (key === "Thickness Unit"){
@@ -292,30 +292,38 @@
                       var pubURL = "https://www.isgs.illinois.edu/maps/county-maps/surficial-geology/kane";
                       myAttributes += '<b>' + key + "</b>:  " + "<a target='_blank' href='" + pubURL + "'>" + feature.attributes["Publication ID"] + "</a><br>";
                     }
-                    else if (key === "CrossSection_URL"){
-                      myAttributes += "";
-                    }
-                    else if (key === "Cross-section ID"){
-                      myAttributes += '<b>' + key + "</b>:  " + "<a target='_blank' href='" + feature.attributes["CrossSection_URL"] + "'>" + feature.attributes["Cross-section ID"] + "</a><br>";
-                    }
-                    else if (key === "Borehole ID"){
-                      var gLogURL = "http://maps.isgs.illinois.edu/vxs/logs/" + feature.attributes[key] + ".pdf";
-                      myAttributes += '<b>' + key + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes["Graphic Log"] + "</a><br>";
-                    }
-                    else if (key === "XsecFileName"){
-                      var gLogURL = "http://maps.isgs.illinois.edu/vxs/xs/" + feature.attributes[key] + ".pdf";
+                    else if (key === "Cross Section File Name"){
+                      var gLogURL = "http://maps.isgs.illinois.edu/vxs/mchenry/xs/" + feature.attributes[key] + ".pdf";
                       myAttributes += '<b>' + "Cross Section Name" + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes[key] + "</a><br>";
                     }
-                    else if (key === "USGS_LINK"){
-                      myAttributes += "<a target='_blank' href='" + feature.attributes[key] + "' class='ext'>" + "USGS Realtime Observation Network" + "<span class='ext'></span></a><br>";
+                    else if (key === "Borehole ID"){
+											if (feature.attributes["Graphic Log"] !== ""){
+                        var gLogURL = "http://maps.isgs.illinois.edu/vxs/mchenry/logs/" + feature.attributes["Graphic Log"] + ".pdf";
+                        myAttributes += '<b>' + key + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes["Graphic Log"] + "</a><br>";											  
+											}
+											else{
+											  myAttributes += "";
+											}
+                    }
+                    else if (key === "XsecFileName"){
+                      var gLogURL = "http://maps.isgs.illinois.edu/vxs/mchenry/xs/" + feature.attributes[key] + ".pdf";
+                      myAttributes += '<b>' + "Cross Section Name" + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes[key] + "</a><br>";
+                    }
+                    else if (key === "USGS Realtime Observation Network"){
+											if (feature.attributes[key] !== ""){
+												myAttributes += "<a target='_blank' href='" + feature.attributes[key] + "' class='ext'>" + key + "<span class='ext'></span></a><br>";
+											}else{
+											  myAttributes += "";
+											}
                     }
                     else{                  
                       myAttributes += '<b>' + key + "</b>:  " + feature.attributes[key] + "<br />";
                     }
                   }
                 }
-                  var myTemplate = new InfoTemplate(layerName, myAttributes);
-                  feature.setInfoTemplate(myTemplate);
+								var myTemplate = new InfoTemplate(layerName, myAttributes);
+								feature.setInfoTemplate(myTemplate);
+								
                 return feature;
               });
             });
