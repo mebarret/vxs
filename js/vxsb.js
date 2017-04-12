@@ -297,33 +297,33 @@
                       myAttributes += '<b>' + "Cross Section Name" + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes[key] + "</a><br>";
                     }
                     else if (key === "Borehole ID"){
-											if (feature.attributes["Graphic Log"] !== ""){
+                      if (feature.attributes["Graphic Log"] !== ""){
                         var gLogURL = "http://maps.isgs.illinois.edu/vxs/mchenry/logs/" + feature.attributes["Graphic Log"] + ".pdf";
-                        myAttributes += '<b>' + key + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes["Graphic Log"] + "</a><br>";											  
-											}
-											else{
-											  myAttributes += "";
-											}
+                        myAttributes += '<b>' + key + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes["Graphic Log"] + "</a><br>";                        
+                      }
+                      else{
+                        myAttributes += "";
+                      }
                     }
                     else if (key === "XsecFileName"){
                       var gLogURL = "http://maps.isgs.illinois.edu/vxs/mchenry/xs/" + feature.attributes[key] + ".pdf";
                       myAttributes += '<b>' + "Cross Section Name" + "</b>:  " + "<a target='_blank' href='" + gLogURL + "'>" + feature.attributes[key] + "</a><br>";
                     }
                     else if (key === "USGS Realtime Observation Network"){
-											if (feature.attributes[key] !== ""){
-												myAttributes += "<a target='_blank' href='" + feature.attributes[key] + "' class='ext'>" + key + "<span class='ext'></span></a><br>";
-											}else{
-											  myAttributes += "";
-											}
+                      if (feature.attributes[key] !== ""){
+                        myAttributes += "<a target='_blank' href='" + feature.attributes[key] + "' class='ext'>" + key + "<span class='ext'></span></a><br>";
+                      }else{
+                        myAttributes += "";
+                      }
                     }
                     else{                  
                       myAttributes += '<b>' + key + "</b>:  " + feature.attributes[key] + "<br />";
                     }
                   }
                 }
-								var myTemplate = new InfoTemplate(layerName, myAttributes);
-								feature.setInfoTemplate(myTemplate);
-								
+                var myTemplate = new InfoTemplate(layerName, myAttributes);
+                feature.setInfoTemplate(myTemplate);
+                
                 return feature;
               });
             });
