@@ -29,10 +29,6 @@
         "esri/dijit/Legend",
         "esri/dijit/Scalebar", 
 
-        "esri/arcgis/utils",
-        "esri/geometry/mathUtils",
-        "esri/geometry/geodesicUtils",
-        "esri/units",
         "esri/domUtils",
         "esri/config",
 
@@ -84,10 +80,6 @@
         Legend,
         Scalebar, 
 
-        arcgisUtils,
-        mathUtils,
-        geodesicUtils,
-        Units,
         domUtils,
         esriConfig, 
 
@@ -231,8 +223,6 @@
       //Add layers to map
       map.addLayers([surficialGeol, gLayer]);
 
-
-
       //Create LayersList
       var layerList = new LayerList({
         map: map,
@@ -355,16 +345,13 @@
       });      
 
 //---------------Begin cross section profile generation----------------------------------------------------------------------------------------------------------------
-      var formationLayer = new GridLayer();      
-      
+      var formationLayer = new GridLayer();            
       var resultPixels;
       var resultMiles;
-      var resultMeters;
-      var resultMilesRound;
       
       //create symbol that will appear on the map when user hovers over a location on the cross section profile            
       var ptSymbol = new SimpleMarkerSymbol({
-        "color":[0,255,0,0],
+        "color":[0,0,0,0],
         "size":12,
         "angle":0,
         "xoffset":0,
@@ -375,7 +362,19 @@
           "color":[255,0,0,255],
           "width":2,
           "type":"esriSLS",
-          "style":"esriSLSSolid"}});
+          "style":"esriSLSSolid"}
+        });
+          
+      //create symbol for cross section line
+      //var xsLineSymbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255,0,0]), 1);  //dashed red line
+      var xsLineSymbol = new SimpleLineSymbol({
+        "type": "esriSLS",
+        "style": "esriSLSDash",
+        "color": [255,0,0,255],
+        "width": 1
+      });
+ 
+
       
       //create identify tasks and parameter objects
       var gridIdentifyTask, gridIdentifyParams;    //task for identify task on grid layers
@@ -401,21 +400,14 @@
         clearDataPointObjects();
         
         if (evtObj.geometry.type == "polyline"){
-
-          var symbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255,0,0]), 1);  //dashed red line
   
           //create graphic for cross section line and then show the graphic on the map
-          var myLine = new Graphic(evtObj.geometry, symbol);
+          var myLine = new Graphic(evtObj.geometry, xsLineSymbol);
           gLayer.clear();  //clears old graphic
           gLayer.add(myLine);  //add to graphics layer
   
           resultMiles = geometryEngine.geodesicLength(evtObj.geometry, "miles");
-          //console.log(resultMiles + " miles");
-          resultMeters = geometryEngine.geodesicLength(evtObj.geometry, "meters");        
-          //console.log(resultMeters + " meters");
           resultPixels = (resultMiles * 72);
-          //console.log(resultPixels + " pixels");
-          resultMilesRound = Math.round(resultMiles*100)/100;
           
           //TO-DO:  insert code to get the inflection points and their lat long along the cross section line.         
           
@@ -429,15 +421,11 @@
         }
         else{
           
-          //alert("you just drew a point!");
-          
           var mp =  new Point(evtObj.geometry.x, evtObj.geometry.y, map.spatialReference);         
           executeBoreholeIdentify(mp);
         }
         
         if (!dom.byId("XSPane")._showing){
-          console.log("You made it to the if!");
-          //dom.byId("XSPane").toggle(); 
           dom.byId("XSPane").style.display = "block";
           dom.byId("closeXS").style.display = "block";
           
